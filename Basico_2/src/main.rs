@@ -9,7 +9,7 @@ use std::path::Path;
             return false;
         }else{
             let y = x.strip_prefix("0x").unwrap_or(x);
-            !y.is_empty() && y.char().all(|c| c.is_ascii_hexdigit());
+            !y.is_empty() && y.chars().all(|c| c.is_ascii_hexdigit());
         }
     return true;
     }
@@ -24,7 +24,7 @@ fn read_log () -> Result<(), Box<dyn std::error::Error>>{
     // Retorna falha (1) se a string não for encontrada.
     // Retorna erro (>1) se o arquivo não existir ou outro problema de SO ocorrer.
     
-    let log_file = "switch_mac_event.log";
+    let log_file = "switch_mac_events.log";
     let search_term = "ERROR";
     let folder = "/home/luiz/Desktop/switch logs/";
     let f = dir_valid(folder);
@@ -52,7 +52,7 @@ fn read_log () -> Result<(), Box<dyn std::error::Error>>{
                 if error_string.is_empty(){
                     println!("Nenhuma ocorrencia em {}" , search_term);
                 }else {
-                    eprintln!("Falha ao invocar o processo {}", error_string());
+                    eprintln!("Falha ao invocar o processo {}", error_string);
                 }
             }
     }
@@ -62,5 +62,5 @@ fn read_log () -> Result<(), Box<dyn std::error::Error>>{
 
 fn main() {
   let log = read_log();
-  println!("{}",log);
+  println!("{:?}",log);
 }
